@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript" src="webtoolkitsha1.js"></script>
+<script type="text/javascript">
+function getUnixTime()
+{
+	var theDate = new Date();
+	return Math.round(theDate.getTime()/1000.0);
+}
+
+function generateTimeHash(form)
+{
+	if (form != null) {
+		var timestr = getUnixTime();
+		var ss = document.ssuploadform.sharedsecret.value;
+		form.ts.value = timestr;
+		var hashstr = SHA1(ss + timestr);
+		alert('UNIX Time=[' + timestr + ']\nSecret Key=[' + ss + ']\nSHA1 Hash=[' + hashstr + ']');
+		form.hash.value = hashstr;
+		return true;
+	}
+	return false;
+}
+
+</script>
+<head>
+<body bgcolor="#FFFFFF" text="#000000" style="font-family:Arial, Helvetica, sans-serif;font-size:12px">
+<img src="logo_header.gif" alt="Slideshare Logo" width="200" height="48" border="0">
+<br/><br/>
+<p>
+This is a sample web-page to test the Slideshare upload API. Please enter your API Key, Shared secret and your Slideshare Credentials to post a slideshow to <a href="http://www.slideshare.net" target="_blank">Slideshare</a>. Feel free to modify and use this code in your own web applications. <strong>Do not share your API keys with anyone to prevent abuse from your Slideshare account.</strong>
+</p>
+<p>On success, you will get the Slideshow ID of the slideshow you uploaded to Slideshare. If things go wrong (ex. you do not provide valide credentials etc), an appropriate error code will be returned. More documentation can be found on <a href="http://www.slideshare.net/developers/documentation">http://www.slideshare.net/developers/documentation</a>. For more support, post a message on the <a href="http://groups.google.com/group/slideshare-developers">Slideshare Developers Forum</a> or e-mail to <a href="mailto:api@slideshare.net">api@slideshare.net</a></p>
+<p>Thanks to <a href="http://www.webtoolkit.info">Web Toolkit</a> for the Javascript Snippet which calculates SHA1 hash required in the upload.</p>
+<form action="http://www.slideshare.net/api/1/upload_slideshow" method="post" enctype='multipart/form-data' name="ssuploadform">
+Slideshare API Key (api_key):<br/>
+<input name="api_key" type="text" size="20">
+<br><br>
+Slideshare Shared Secret:<br/>
+<input name="sharedsecret" type="text" size="20">
+<br><br>
+<input name="ts" type="hidden" value="">
+<input type="hidden" name="hash" value="">
+Slideshare username (username): <br><input name="username" type="text" value="" size="20"><br><br>
+Slideshare password (password): <br><input name="password" type="text" value="" size="20"><br><br>
+Slideshow Title (slideshow_title): <br><input name="slideshow_title" type="text" value="My cool new Slideshow!" size="50"><br><br>
+Slideshow Source File (slideshow_srcfile): <br><input name="slideshow_srcfile" type="file" size="20"><br><br>
+<input type="submit" onClick="return generateTimeHash(this.form)" value="Upload Slideshow!">
+</form>
+</body>
+</html>
