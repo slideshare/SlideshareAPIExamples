@@ -1,3 +1,6 @@
 Wrappers and examples for how to use the Slideshare API
 
-The directory PHPKit contains a PHP wrapper for the Slideshare API name SSUtil
+The directory PHPKit contains a PHP wrapper for the Slideshare API named SSUtil.
+
+The directory Javascript contains examples in Javascript.
+It contains an example of how to upload content using javascript and PHP.
