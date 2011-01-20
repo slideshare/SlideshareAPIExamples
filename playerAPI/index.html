@@ -1,0 +1,50 @@
+<html>
+        <head>
+                <title>SlideShare Player API Example</title>
+                <script type="text/javascript" src="swfobject.js"></script>    
+                <script type="text/javascript">
+                        var flashMovie;
+
+                        //Load the flash player. Properties for the player can be changed here.
+                        function loadPlayer() {
+                                //allowScriptAccess from other domains
+                                var params = { allowScriptAccess: "always" };
+                                var atts = { id: "player" };
+
+                                //doc: The path of the file to be used
+                                //startSlide: The number of the slide to start from
+                                //rel: Whether to show a screen with related slideshows at the end or not. 0 means false and 1 is true..
+                                var flashvars = { doc : "thirst-upload-800x600-1215534320518707-8", startSlide : 1, rel : 0 };
+
+                                //Generate the embed SWF file
+                                swfobject.embedSWF("http://static.slidesharecdn.com/swf/ssplayer2.swf", "player", "598", "480", "8", null, flashvars, params, atts);
+
+                                //Get a reference to the player
+                                flashMovie = document.getElementById("player");
+                        }
+
+                        //Jump to the appropriate slide
+                        function jumpTo(){
+                                flashMovie.jumpTo(parseInt(document.getElementById("slidenumber").value));
+                        }
+
+                        //Update the slide number in the field for the same
+                        function updateSlideNumber(){
+                                document.getElementById("slidenumber").value = flashMovie.getCurrentSlide();
+                        }
+                </script>
+        </head>
+        <body bgcolor="#ffffff" onload="loadPlayer();">
+                <div id="player">
+                        You need Flash player 8+ and JavaScript enabled to view this video.
+                </div>
+                <div style="margin-left: 150px; margin-top: 10px;">
+                       <button onclick="flashMovie.first();updateSlideNumber();" type="button" value="First">First</button>
+                       <button onclick="flashMovie.previous();updateSlideNumber();" type="button" value="Previous">Previous</button>
+                       <button onclick="jumpTo();updateSlideNumber();" type="button" value="Go to">Go to</button>
+                       <input type="text" id="slidenumber" size="2" value="1" onkeydown="if (event.keyCode == 13) { jumpTo(); }"/>
+                       <button onclick="flashMovie.next();updateSlideNumber();" type="button" value="Next">Next</button>
+                       <button onclick="flashMovie.last();updateSlideNumber();" type="button" value="Last">Last</button>
+               </div>
+        </body>
+</html>
