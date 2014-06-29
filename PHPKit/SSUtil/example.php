@@ -11,7 +11,7 @@ print_r($apiobj->get_slideUser('variable_orr',0,50));
 print_r($apiobj->get_slideInfo(47236));
 
 //RSS utility functions
-$apiobj->get_RSS('http://www.slideshare.net/rss/latest');*/
+$apiobj->get_RSS('http://www.slideshare.net/rss/latest');
 echo $apiobj->make_RSS('Test feed','Test description','12',$apiobj->get_slideUser('variable_orr',0,50));
 
 ?>
